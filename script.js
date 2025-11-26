@@ -24,17 +24,20 @@ const startOverlay = document.getElementById('audio-start-overlay');
 
 // Start audio on user interaction
 if (startOverlay) {
-  startOverlay.addEventListener('click', function() {
+  startOverlay.addEventListener('click', function () {
     if (audio) {
       audio.volume = 0.1;
-      audio.play().then(() => {
-        startOverlay.classList.add('hidden');
-        setTimeout(() => startOverlay.remove(), 500);
-      }).catch(err => {
-        console.log('Audio play failed:', err);
-        startOverlay.classList.add('hidden');
-        setTimeout(() => startOverlay.remove(), 500);
-      });
+      audio
+        .play()
+        .then(() => {
+          startOverlay.classList.add('hidden');
+          setTimeout(() => startOverlay.remove(), 500);
+        })
+        .catch((err) => {
+          console.log('Audio play failed:', err);
+          startOverlay.classList.add('hidden');
+          setTimeout(() => startOverlay.remove(), 500);
+        });
     }
   });
 }
