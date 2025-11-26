@@ -19,6 +19,25 @@ const images = [
 
 const heroSection = document.querySelector('.hero-section');
 const imageContainer = document.getElementById('image-container');
+const audio = document.querySelector('.background-audio');
+const startOverlay = document.getElementById('audio-start-overlay');
+
+// Start audio on user interaction
+if (startOverlay) {
+  startOverlay.addEventListener('click', function() {
+    if (audio) {
+      audio.volume = 0.1;
+      audio.play().then(() => {
+        startOverlay.classList.add('hidden');
+        setTimeout(() => startOverlay.remove(), 500);
+      }).catch(err => {
+        console.log('Audio play failed:', err);
+        startOverlay.classList.add('hidden');
+        setTimeout(() => startOverlay.remove(), 500);
+      });
+    }
+  });
+}
 
 // Track current image index for rotation through all images
 let currentImageIndex = 0;
@@ -113,9 +132,3 @@ heroSection.addEventListener('mousemove', function (e) {
 heroSection.addEventListener('mouseleave', function () {
   isHovering = false;
 });
-
-// Set background audio volume to low
-const audio = document.querySelector('.background-audio');
-if (audio) {
-  audio.volume = 0.5; // 50% volume for very calm, subtle background music
-}
